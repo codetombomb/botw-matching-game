@@ -90,9 +90,9 @@ function shuffleCards(cards) {
 
 function createImg(info) {
     const img = document.createElement('img')
-    img.src = info.image
+    img.src = 'https://static.wikia.nocookie.net/zelda_gamepedia_en/images/d/dd/BotW_Crest_of_the_Sheikah_Symbol.png/revision/latest/scale-to-width-down/320?cb=20160505151000'
     img.className = "card"
-    img.addEventListener("click", flipCard)
+    img.addEventListener("click", (e) => flipCard(e,info))
     return img
 }
 
@@ -107,8 +107,12 @@ function populateCardMap() {
     }
 }
 
-function flipCard() {
-    console.log("flipping card");
+function flipCard(e,info) {
+    // check end game
+    // check second selection
+    // check missed selection
+    e.target.src = info.image
+
 }
 
 function renderTimer() {
@@ -126,9 +130,11 @@ function stopGame() {
 }
 
 function renderHearts() {
-    console.log("rendering hearts");
+    const hearts = document.querySelector("#hearts")
+    const h3 = document.createElement("h3")
+    h3.textContent = "Lives: "
+    hearts.append(h3)
     for (let i = 0; i < gameConfig.hearts; i++) {
-        const hearts = document.querySelector("#hearts")
         const heartImg = document.createElement("img")
         heartImg.className = "heart"
         heartImg.src = './assets/zelda-heart.png'
